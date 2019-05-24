@@ -1,0 +1,33 @@
+<%- include('../partials/header') %>
+<div class='container'>
+    <h1> <%= election.name %> </h1>
+    <h2> Code: <%= election.code %> </h2>
+    <a class='btn btn-primary' href='/elections/<%= election._id %>/edit' role='button'>Edit</a> 
+    <a class='btn btn-primary' href='/elections/<%= election._id %>/candidates/new' role='button'>Add Candidate</a> 
+    <a class='btn btn-primary' href='/elections/<%= election._id %>/positions/new' role='button'>Add Position</a>     
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Position</th>
+          <th scope="col">Votes</th>
+        </tr>
+      </thead>
+      <tbody>   
+          <% election.candidates.sort((a, b) => a.position.localeCompare(b.position)).forEach((candidate) => { %>
+            <tr>
+              <td><%= candidate.name %></td>
+              <td><%= candidate.position %></td>
+              <td><%= candidate.votes %> </td>
+            </tr>
+          <% }); %>      
+      </tbody>
+    </table>  
+    <p>
+      To vote text (248) 965-4840 @<%= election.code %> and follow the instructions!
+    </p>
+    <form class='delete-form' action='/elections/<%= election._id %>/?_method=DELETE' method='POST'>
+        <button class='btn btn-danger'>Delete</button>
+    </form>      
+</div>    
+<% include('../partials/footer') %>

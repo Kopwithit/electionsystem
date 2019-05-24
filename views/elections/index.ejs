@@ -1,0 +1,20 @@
+<%- include('../partials/header') %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Created</th>
+          <th scope="cole">Code</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% elections.forEach((election) => { %>
+            <td><a href='/elections/<%= election._id %>'><%= election.name %></a> </td>
+            <td><%= election.created %> </td>
+            <td data-toggle='tooltip' data-placement='right' title='Text @<%= election.code %>'><%= election.code %></td>
+        </tr>
+        <% });%>          
+      </tbody>
+    </table>    
+    <a class="btn btn-success" href="/elections/new" role="button">Create Election</a>
+<%- include('../partials/footer') %>
